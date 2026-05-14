@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Risk Management · Study data</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #001858;
+      --cream: #fef6e4;
+      --muted: #172c66;
+      --accent: #f582ae;
+      --teal: #8bd3dd;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "DM Sans", system-ui, sans-serif;
+      background: linear-gradient(165deg, var(--cream) 0%, #f3d2c1 55%, var(--cream) 100%);
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    header {
+      padding: 1.5rem clamp(1rem, 4vw, 2.5rem);
+      border-bottom: 2px solid var(--teal);
+      background: rgba(254, 246, 228, 0.92);
+    }
+    h1 {
+      margin: 0 0 0.35rem;
+      font-family: Fraunces, Georgia, serif;
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      color: var(--navy);
+      font-weight: 700;
+    }
+    header p { margin: 0; font-size: 0.95rem; max-width: 52rem; }
+    main { padding: clamp(1rem, 3vw, 2rem); max-width: 960px; margin: 0 auto; }
+    .card {
+      background: rgba(255, 255, 255, 0.75);
+      border: 2px solid var(--navy);
+      border-radius: 16px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+      box-shadow: 4px 4px 0 var(--navy);
+    }
+    .card h2 {
+      margin: 0 0 0.5rem;
+      font-family: Fraunces, Georgia, serif;
+      font-size: 1.15rem;
+      color: var(--navy);
+    }
+    .meta { font-size: 0.85rem; color: var(--muted); opacity: 0.9; }
+    .pill {
+      display: inline-block;
+      margin: 0.25rem 0.35rem 0 0;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      background: rgba(139, 211, 221, 0.35);
+      color: var(--navy);
+      border: 1px solid var(--teal);
+    }
+    .err {
+      background: rgba(245, 130, 174, 0.2);
+      border-color: var(--accent);
+      color: var(--navy);
+    }
+    details.raw {
+      margin-top: 1.5rem;
+      border: 2px solid var(--teal);
+      border-radius: 12px;
+      background: rgba(254, 246, 228, 0.9);
+      overflow: hidden;
+    }
+    details.raw summary {
+      cursor: pointer;
+      padding: 0.75rem 1rem;
+      font-weight: 700;
+      color: var(--navy);
+      background: rgba(139, 211, 221, 0.2);
+    }
+    details.raw pre {
+      margin: 0;
+      padding: 1rem;
+      max-height: 50vh;
+      overflow: auto;
+      font-size: 0.72rem;
+      line-height: 1.45;
+      background: #fff;
+      border-top: 1px solid var(--teal);
+    }
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Risk Management Exam Prep</h1>
+    <p>
+      此頁由 Vercel 靜態託管，從 <code>study_data.json</code> 讀取章節摘要。
+      完整互動（詞彙 iframe、測驗、側欄新聞）請在本機執行
+      <code>streamlit run app.py</code> 或使用 Streamlit Community Cloud。
+    </p>
+  </header>
+  <main id="app">
+    <p class="meta">載入中…</p>
+  </main>
+  <footer>風險管理與保險 · Personal Learning Website</footer>
+  <script>
+    (function () {
+      var app = document.getElementById("app");
+      function countGlossary(nodes) {
+        if (!Array.isArray(nodes)) return 0;
+        var n = 0;
+        nodes.forEach(function (item) {
+          if (!item || typeof item !== "object") return;
+          if (item.term || item.zh) n += 1;
+          var kids = item.children || item.sub_items;
+          if (Array.isArray(kids)) n += countGlossary(kids);
+        });
+        return n;
+      }
+      function render(data) {
+        var keys = Object.keys(data).filter(function (k) {
+          return k.indexOf("chapter_") === 0 && data[k] && typeof data[k] === "object";
+        });
+        keys.sort();
+        if (!keys.length) {
+          app.innerHTML = '<div class="card err"><h2>無章節資料</h2><p>JSON 中找不到 chapter_* 區塊。</p></div>';
+          return;
+        }
+        var html = "";
+        keys.forEach(function (key) {
+          var ch = data[key];
+          var title = ch.title || key;
+          var gloss = ch.glossary || [];
+          var quiz = ch.quiz || [];
+          var objectives = ch.learning_objectives || ch.objectives || [];
+          var gCount = Array.isArray(gloss) ? countGlossary(gloss) : 0;
+          html += '<article class="card">';
+          html += "<h2>" + key.replace(/_/g, " ") + " — " + escapeHtml(title) + "</h2>";
+          html += '<p class="meta">';
+          html += '<span class="pill">Glossary 節點 ~' + gCount + "</span>";
+          html += '<span class="pill">Quiz ' + quiz.length + "</span>";
+          html += '<span class="pill">Objectives ' + objectives.length + "</span>";
+          html += "</p></article>";
+        });
+        html +=
+          '<details class="raw"><summary>檢視原始 JSON（除錯用）</summary><pre id="raw-json"></pre></details>';
+        app.innerHTML = html;
+        document.getElementById("raw-json").textContent = JSON.stringify(data, null, 2);
+      }
+      function escapeHtml(s) {
+        return String(s)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+      fetch("./study_data.json", { cache: "no-store" })
+        .then(function (r) {
+          if (!r.ok) throw new Error("HTTP " + r.status + " — 無法讀取 study_data.json");
+          return r.text();
+        })
+        .then(function (text) {
+          var data;
+          try {
+            data = JSON.parse(text);
+          } catch (e) {
+            throw new Error("JSON 解析失敗：" + (e && e.message ? e.message : String(e)));
+          }
+          render(data);
+        })
+        .catch(function (e) {
+          app.innerHTML =
+            '<div class="card err"><h2>載入失敗</h2><p>' +
+            escapeHtml(e.message || String(e)) +
+            "</p></div>";
+        });
+    })();
+  </script>
+</body>
+</html>
