@@ -1122,12 +1122,17 @@ st.markdown(
         line-height: 1.75 !important;
     }
 
-    /* ── SIDEBAR (fixed width, always visible; collapse control hidden below) ─ */
+    /* ── SIDEBAR (fixed width; keep visible — do not hide collapsedControl) ─ */
     section[data-testid="stSidebar"] {
-        min-width: 300px !important;
-        max-width: 300px !important;
+        flex: 0 0 300px !important;
+        min-width: 280px !important;
+        max-width: 340px !important;
         width: 300px !important;
         box-sizing: border-box !important;
+        transform: translateX(0) !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        margin-left: 0 !important;
     }
     [data-testid="stSidebar"] {
         background-color: #f3d2c1 !important;
@@ -1154,6 +1159,18 @@ st.markdown(
         padding-right: 0.85rem !important;
         box-sizing: border-box !important;
     }
+    [data-testid="stSidebarCollapseButton"] button {
+        background-color: #f582ae !important;
+        color: #001858 !important;
+        border: 2px solid #001858 !important;
+        border-radius: 0 10px 10px 0 !important;
+        opacity: 1 !important;
+    }
+    [data-testid="stSidebarCollapseButton"] button:hover {
+        background-color: #001858 !important;
+        color: #fef6e4 !important;
+    }
+
     /* Prominent section banners (Chinese) */
     .sidebar-pill-header {
         font-family: 'Fraunces', serif !important;
@@ -1560,12 +1577,13 @@ st.markdown(
     }
 
     /* ── STREAMLIT CHROME (toolbar / deploy / header strip) ─ */
+    /* NOTE: Do NOT hide collapsedControl — if the sidebar is slid off-screen, that
+       control is the only way to open it again. stSidebarCollapseButton must stay
+       visible for the same reason. */
     [data-testid="stToolbar"],
     [data-testid="stDecoration"],
     [data-testid="stDeployButton"],
-    button[data-testid="baseButton-header"],
-    [data-testid="collapsedControl"],
-    [data-testid="stSidebarCollapseButton"] {
+    button[data-testid="baseButton-header"] {
         display: none !important;
     }
     header[data-testid="stHeader"] {
