@@ -37,6 +37,23 @@
       font-weight: 700;
     }
     header p { margin: 0; font-size: 0.95rem; max-width: 52rem; }
+    .site-banner {
+      margin: 1rem 0 0;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 2px solid var(--navy);
+      box-shadow: 4px 4px 0 var(--navy);
+      max-width: 52rem;
+      background: rgba(255,255,255,0.5);
+    }
+    .site-banner img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: min(240px, 32vh);
+      object-fit: cover;
+      vertical-align: middle;
+    }
     main { padding: clamp(1rem, 3vw, 2rem); max-width: 960px; margin: 0 auto; }
     .card {
       background: rgba(255, 255, 255, 0.75);
@@ -109,6 +126,19 @@
       完整互動（詞彙 iframe、測驗、側欄新聞）請在本機執行
       <code>streamlit run app.py</code> 或使用 Streamlit Community Cloud。
     </p>
+    <picture class="site-banner">
+      <source srcset="images/banner.webp" type="image/webp" />
+      <source srcset="images/banner.png" type="image/png" />
+      <img
+        src="images/banner.jpg"
+        alt="課程橫幅圖"
+        width="1200"
+        height="400"
+        loading="lazy"
+        decoding="async"
+        onerror="this.closest('picture').style.display='none'"
+      />
+    </picture>
   </header>
   <main id="app">
     <p class="meta">載入中…</p>

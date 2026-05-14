@@ -1079,11 +1079,19 @@ chapter_map = {
 
 apply_glossary_nav_from_query_params(chapter_map)
 
+_APP_ROOT = Path(__file__).resolve().parent
+_SITE_BANNER = next(
+    (p for p in (_APP_ROOT / "images" / n for n in ("banner.webp", "banner.png", "banner.jpg")) if p.is_file()),
+    None,
+)
+
 st.markdown(
     '''<h1 style="font-family: Fraunces, serif; color: #001858; font-weight: 700; font-size: 2.4rem; letter-spacing: -0.5px; margin-bottom: 0.2rem;">
     🛡️ Risk Management Exam Prep</h1>''',
     unsafe_allow_html=True,
 )
+if _SITE_BANNER is not None:
+    st.image(str(_SITE_BANNER), use_container_width=True)
 st.markdown(
     """
     <style>
