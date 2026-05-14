@@ -48,7 +48,12 @@ def apply_glossary_nav_from_query_params(chapter_map: dict) -> None:
                 pass
 
 
-st.set_page_config(page_title="Risk Exam Trainer", layout="wide", page_icon="🛡️")
+st.set_page_config(
+    page_title="Risk Exam Trainer",
+    layout="wide",
+    page_icon="🛡️",
+    initial_sidebar_state="expanded",
+)
 
 # When Streamlit's bundled Material Symbols Rounded fails to load, ligature text
 # (e.g. "keyboard_arrow_down") would show; scrub those nodes after a delayed probe.
@@ -1117,7 +1122,13 @@ st.markdown(
         line-height: 1.75 !important;
     }
 
-    /* ── SIDEBAR ───────────────────────────────────────── */
+    /* ── SIDEBAR (fixed width, always visible; collapse control hidden below) ─ */
+    section[data-testid="stSidebar"] {
+        min-width: 300px !important;
+        max-width: 300px !important;
+        width: 300px !important;
+        box-sizing: border-box !important;
+    }
     [data-testid="stSidebar"] {
         background-color: #f3d2c1 !important;
         border-right: 2px solid #001858 !important;
@@ -1136,6 +1147,40 @@ st.markdown(
     [data-testid="stSidebar"] hr {
         border-color: #001858 !important;
         opacity: 0.25 !important;
+    }
+    [data-testid="stSidebarUserContent"],
+    [data-testid="stSidebarHeader"] {
+        padding-left: 1rem !important;
+        padding-right: 0.85rem !important;
+        box-sizing: border-box !important;
+    }
+    /* Prominent section banners (Chinese) */
+    .sidebar-pill-header {
+        font-family: 'Fraunces', serif !important;
+        font-weight: 800 !important;
+        font-size: 1.08rem !important;
+        letter-spacing: 0.04em !important;
+        color: #fef6e4 !important;
+        background: linear-gradient(118deg, #001858 0%, #172c66 92%) !important;
+        padding: 10px 14px !important;
+        border-radius: 12px !important;
+        border: 2px solid #001858 !important;
+        margin: 4px 0 14px 0 !important;
+        box-shadow: 4px 4px 0 #8bd3dd !important;
+    }
+    .sidebar-pill-header--news {
+        color: #001858 !important;
+        background: linear-gradient(118deg, #8bd3dd 0%, #f582ae 100%) !important;
+        border-color: #001858 !important;
+        box-shadow: 4px 4px 0 #001858 !important;
+        margin-top: 10px !important;
+    }
+    .sidebar-pill-sub {
+        font-size: 0.78rem !important;
+        font-weight: 600 !important;
+        color: #172c66 !important;
+        margin: -6px 0 12px 0 !important;
+        opacity: 0.9 !important;
     }
 
     /* ── SIDEBAR BUTTONS (force solid, never transparent) ── */
@@ -1519,7 +1564,8 @@ st.markdown(
     [data-testid="stDecoration"],
     [data-testid="stDeployButton"],
     button[data-testid="baseButton-header"],
-    [data-testid="collapsedControl"] {
+    [data-testid="collapsedControl"],
+    [data-testid="stSidebarCollapseButton"] {
         display: none !important;
     }
     header[data-testid="stHeader"] {
@@ -1567,7 +1613,11 @@ if _hits:
                 apply_brute_glossary_jump(_row)
                 st.rerun()
 
-st.sidebar.header("Study Control Panel")
+st.sidebar.markdown(
+    '<div class="sidebar-pill-header">篩選單元</div>'
+    '<p class="sidebar-pill-sub">Study Control Panel · 章節與測驗區塊</p>',
+    unsafe_allow_html=True,
+)
 chapter_options = list(chapter_map.keys())
 if "sidebar_chapter_select" not in st.session_state:
     st.session_state.sidebar_chapter_select = chapter_options[0]
@@ -1586,7 +1636,11 @@ st.sidebar.write("- Multiple Choice (English)")
 st.sidebar.write("- Calculation")
 st.sidebar.write("- Short Answer")
 st.sidebar.markdown("---")
-st.sidebar.subheader("🌐 Live Insurance Insights")
+st.sidebar.markdown(
+    '<div class="sidebar-pill-header sidebar-pill-header--news">每日新聞</div>'
+    '<p class="sidebar-pill-sub">Live Insurance Insights</p>',
+    unsafe_allow_html=True,
+)
 if "news_refresh_token" not in st.session_state:
     st.session_state["news_refresh_token"] = random.randint(1, 10_000_000)
 if "news_timestamp" not in st.session_state:
