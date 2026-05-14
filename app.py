@@ -1122,7 +1122,7 @@ st.markdown(
         line-height: 1.75 !important;
     }
 
-    /* ── SIDEBAR (fixed width; keep visible — do not hide collapsedControl) ─ */
+    /* ── SIDEBAR (fixed width; forced on-screen — collapse controls hidden below) ─ */
     section[data-testid="stSidebar"] {
         flex: 0 0 300px !important;
         min-width: 280px !important;
@@ -1159,16 +1159,30 @@ st.markdown(
         padding-right: 0.85rem !important;
         box-sizing: border-box !important;
     }
-    [data-testid="stSidebarCollapseButton"] button {
-        background-color: #f582ae !important;
-        color: #001858 !important;
-        border: 2px solid #001858 !important;
-        border-radius: 0 10px 10px 0 !important;
-        opacity: 1 !important;
+    /* Hide Streamlit sidebar open/close controls (broken icon font shows "keyboard…"; blue block) */
+    [data-testid="stSidebarCollapseButton"],
+    [data-testid="collapsedControl"] {
+        display: none !important;
+        visibility: hidden !important;
+        width: 0 !important;
+        height: 0 !important;
+        min-width: 0 !important;
+        min-height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        overflow: hidden !important;
+        pointer-events: none !important;
+        opacity: 0 !important;
+        clip: rect(0, 0, 0, 0) !important;
+        clip-path: inset(50%) !important;
     }
-    [data-testid="stSidebarCollapseButton"] button:hover {
-        background-color: #001858 !important;
-        color: #fef6e4 !important;
+    [data-testid="stSidebarHeader"] {
+        background: transparent !important;
+        border: none !important;
+        min-height: 0 !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
     }
 
     /* Prominent section banners (Chinese) */
@@ -1577,9 +1591,7 @@ st.markdown(
     }
 
     /* ── STREAMLIT CHROME (toolbar / deploy / header strip) ─ */
-    /* NOTE: Do NOT hide collapsedControl — if the sidebar is slid off-screen, that
-       control is the only way to open it again. stSidebarCollapseButton must stay
-       visible for the same reason. */
+    /* Sidebar toggle is hidden in SIDEBAR block; sidebar stays on-screen via translateX(0). */
     [data-testid="stToolbar"],
     [data-testid="stDecoration"],
     [data-testid="stDeployButton"],
