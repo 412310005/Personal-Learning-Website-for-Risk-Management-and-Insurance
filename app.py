@@ -49,7 +49,7 @@ def apply_glossary_nav_from_query_params(chapter_map: dict) -> None:
 
 
 st.set_page_config(
-    page_title="Risk Exam Trainer",
+    page_title="Risk Management & Insurance Learning Platform",
     layout="wide",
     page_icon="🛡️",
     initial_sidebar_state="expanded",
@@ -1087,7 +1087,7 @@ _SITE_BANNER = next(
 
 st.markdown(
     '''<h1 style="font-family: 'Playfair Display', Georgia, serif; color: #f5f0e8; font-weight: 600; font-size: 2.45rem; letter-spacing: -0.02em; margin-bottom: 0.35rem;">
-    🛡️ Risk Management Exam Prep</h1>''',
+    🛡️ Risk Management & Insurance Learning Platform</h1>''',
     unsafe_allow_html=True,
 )
 if _SITE_BANNER is not None:
