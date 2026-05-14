@@ -6,45 +6,54 @@
   <title>Risk Management · Study data</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --navy: #001858;
-      --cream: #fef6e4;
-      --muted: #172c66;
-      --accent: #f582ae;
-      --teal: #8bd3dd;
+      --mc-bg: #0d1b2a;
+      --mc-text: #f5f0e8;
+      --mc-muted: rgba(245, 240, 232, 0.72);
+      --mc-line: rgba(245, 240, 232, 0.22);
+      --mc-panel: rgba(245, 240, 232, 0.06);
     }
     * { box-sizing: border-box; }
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: "DM Sans", system-ui, sans-serif;
-      background: linear-gradient(165deg, var(--cream) 0%, #f3d2c1 55%, var(--cream) 100%);
-      color: var(--muted);
-      line-height: 1.6;
+      font-family: "Inter", system-ui, sans-serif;
+      font-weight: 300;
+      background: var(--mc-bg);
+      color: var(--mc-muted);
+      line-height: 1.65;
     }
     header {
       padding: 1.5rem clamp(1rem, 4vw, 2.5rem);
-      border-bottom: 2px solid var(--teal);
-      background: rgba(254, 246, 228, 0.92);
+      border-bottom: 0.5px solid var(--mc-line);
+      background: var(--mc-bg);
     }
     h1 {
       margin: 0 0 0.35rem;
-      font-family: Fraunces, Georgia, serif;
+      font-family: "Playfair Display", Georgia, serif;
       font-size: clamp(1.5rem, 4vw, 2rem);
-      color: var(--navy);
-      font-weight: 700;
+      color: var(--mc-text);
+      font-weight: 600;
+      letter-spacing: -0.02em;
     }
-    header p { margin: 0; font-size: 0.95rem; max-width: 52rem; }
+    header p { margin: 0; font-size: 0.95rem; max-width: 52rem; font-weight: 400; }
+    header code {
+      font-size: 0.85em;
+      background: var(--mc-panel);
+      border: 0.5px solid var(--mc-line);
+      padding: 0.1em 0.35em;
+      border-radius: 2px;
+      color: var(--mc-text);
+    }
     .site-banner {
       margin: 1rem 0 0;
-      border-radius: 14px;
+      border-radius: 4px;
       overflow: hidden;
-      border: 2px solid var(--navy);
-      box-shadow: 4px 4px 0 var(--navy);
+      border: 0.5px solid var(--mc-line);
       max-width: 52rem;
-      background: rgba(255,255,255,0.5);
+      background: var(--mc-panel);
     }
     .site-banner img {
       display: block;
@@ -52,53 +61,53 @@
       height: auto;
       max-height: min(240px, 32vh);
       object-fit: cover;
-      vertical-align: middle;
     }
     main { padding: clamp(1rem, 3vw, 2rem); max-width: 960px; margin: 0 auto; }
     .card {
-      background: rgba(255, 255, 255, 0.75);
-      border: 2px solid var(--navy);
-      border-radius: 16px;
+      background: var(--mc-panel);
+      border: 0.5px solid var(--mc-line);
+      border-radius: 4px;
       padding: 1.25rem 1.5rem;
       margin-bottom: 1rem;
-      box-shadow: 4px 4px 0 var(--navy);
     }
     .card h2 {
       margin: 0 0 0.5rem;
-      font-family: Fraunces, Georgia, serif;
-      font-size: 1.15rem;
-      color: var(--navy);
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 1.12rem;
+      color: var(--mc-text);
+      font-weight: 600;
     }
-    .meta { font-size: 0.85rem; color: var(--muted); opacity: 0.9; }
+    .meta { font-size: 0.85rem; color: var(--mc-muted); }
     .pill {
       display: inline-block;
       margin: 0.25rem 0.35rem 0 0;
       padding: 0.2rem 0.55rem;
-      border-radius: 999px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      background: rgba(139, 211, 221, 0.35);
-      color: var(--navy);
-      border: 1px solid var(--teal);
+      border-radius: 2px;
+      font-size: 0.76rem;
+      font-weight: 500;
+      background: rgba(245, 240, 232, 0.08);
+      color: var(--mc-text);
+      border: 0.5px solid var(--mc-line);
     }
     .err {
-      background: rgba(245, 130, 174, 0.2);
-      border-color: var(--accent);
-      color: var(--navy);
+      background: rgba(220, 90, 90, 0.14);
+      border-color: var(--mc-line);
+      color: var(--mc-text);
     }
     details.raw {
       margin-top: 1.5rem;
-      border: 2px solid var(--teal);
-      border-radius: 12px;
-      background: rgba(254, 246, 228, 0.9);
+      border: 0.5px solid var(--mc-line);
+      border-radius: 4px;
+      background: var(--mc-panel);
       overflow: hidden;
     }
     details.raw summary {
       cursor: pointer;
       padding: 0.75rem 1rem;
-      font-weight: 700;
-      color: var(--navy);
-      background: rgba(139, 211, 221, 0.2);
+      font-weight: 500;
+      color: var(--mc-text);
+      background: rgba(245, 240, 232, 0.05);
+      border-bottom: 0.5px solid var(--mc-line);
     }
     details.raw pre {
       margin: 0;
@@ -107,14 +116,16 @@
       overflow: auto;
       font-size: 0.72rem;
       line-height: 1.45;
-      background: #fff;
-      border-top: 1px solid var(--teal);
+      background: rgba(13, 27, 42, 0.85);
+      color: var(--mc-muted);
+      border-top: 0.5px solid var(--mc-line);
     }
     footer {
       text-align: center;
       padding: 2rem 1rem;
       font-size: 0.85rem;
-      color: var(--muted);
+      color: var(--mc-muted);
+      border-top: 0.5px solid var(--mc-line);
     }
   </style>
 </head>

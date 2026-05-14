@@ -1086,7 +1086,7 @@ _SITE_BANNER = next(
 )
 
 st.markdown(
-    '''<h1 style="font-family: Fraunces, serif; color: #001858; font-weight: 700; font-size: 2.4rem; letter-spacing: -0.5px; margin-bottom: 0.2rem;">
+    '''<h1 style="font-family: 'Playfair Display', Georgia, serif; color: #f5f0e8; font-weight: 600; font-size: 2.45rem; letter-spacing: -0.02em; margin-bottom: 0.35rem;">
     🛡️ Risk Management Exam Prep</h1>''',
     unsafe_allow_html=True,
 )
@@ -1095,42 +1095,55 @@ if _SITE_BANNER is not None:
 st.markdown(
     """
     <style>
-    /* ── FONTS ─────────────────────────────────────────── */
-    @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap');
+    /* McKinsey-inspired: deep navy #0d1b2a, cream text #f5f0e8, hairline borders */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@500;600;700&display=swap');
 
-    /* ── BASE & BACKGROUND ─────────────────────────────── */
+    :root {
+        --mc-bg: #0d1b2a;
+        --mc-text: #f5f0e8;
+        --mc-muted: rgba(245, 240, 232, 0.72);
+        --mc-line: rgba(245, 240, 232, 0.22);
+        --mc-sidebar: #0a1522;
+        --mc-elev: rgba(245, 240, 232, 0.06);
+    }
+
     html, body,
     [data-testid="stAppViewContainer"],
     [data-testid="stMain"],
     .main .block-container {
-        background-color: #fef6e4 !important;
-        font-family: 'DM Sans', sans-serif !important;
+        background-color: var(--mc-bg) !important;
+        font-family: 'Inter', system-ui, sans-serif !important;
+        font-weight: 400 !important;
+        color: var(--mc-text) !important;
     }
     section[data-testid="stMain"] > div {
-        background-color: #fef6e4 !important;
+        background-color: var(--mc-bg) !important;
     }
 
-    /* ── HEADINGS ──────────────────────────────────────── */
     h1, h2, h3, h4, h5, h6,
     [data-testid="stHeadingWithActionElements"] h1,
     [data-testid="stHeadingWithActionElements"] h2,
     [data-testid="stHeadingWithActionElements"] h3 {
-        font-family: 'Fraunces', serif !important;
-        color: #001858 !important;
-        font-weight: 700 !important;
-        letter-spacing: -0.3px;
+        font-family: 'Playfair Display', Georgia, serif !important;
+        color: var(--mc-text) !important;
+        font-weight: 600 !important;
+        letter-spacing: -0.02em;
     }
 
-    /* ── BODY TEXT ─────────────────────────────────────── */
     p, li,
     .stMarkdown p,
     [data-testid="stMarkdownContainer"] p {
-        font-family: 'DM Sans', sans-serif !important;
-        color: #172c66 !important;
-        line-height: 1.75 !important;
+        font-family: 'Inter', system-ui, sans-serif !important;
+        font-weight: 300 !important;
+        color: var(--mc-muted) !important;
+        line-height: 1.72 !important;
+    }
+    .stMarkdown strong, [data-testid="stMarkdownContainer"] strong {
+        color: var(--mc-text) !important;
+        font-weight: 600 !important;
     }
 
-    /* ── SIDEBAR (fixed width; forced on-screen — collapse controls hidden below) ─ */
+    /* Sidebar: dark rail, fixed width */
     section[data-testid="stSidebar"] {
         flex: 0 0 300px !important;
         min-width: 280px !important;
@@ -1143,23 +1156,26 @@ st.markdown(
         margin-left: 0 !important;
     }
     [data-testid="stSidebar"] {
-        background-color: #f3d2c1 !important;
-        border-right: 2px solid #001858 !important;
+        background-color: var(--mc-sidebar) !important;
+        border-right: 0.5px solid var(--mc-line) !important;
     }
     [data-testid="stSidebar"] * {
-        color: #001858 !important;
-        font-family: 'DM Sans', sans-serif !important;
+        color: var(--mc-text) !important;
+        font-family: 'Inter', system-ui, sans-serif !important;
+        font-weight: 400 !important;
     }
     [data-testid="stSidebar"] h1,
     [data-testid="stSidebar"] h2,
     [data-testid="stSidebar"] h3,
     [data-testid="stSidebar"] .stSubheader {
-        font-family: 'Fraunces', serif !important;
-        font-weight: 700 !important;
+        font-family: 'Playfair Display', Georgia, serif !important;
+        font-weight: 600 !important;
+        color: var(--mc-text) !important;
     }
     [data-testid="stSidebar"] hr {
-        border-color: #001858 !important;
-        opacity: 0.25 !important;
+        border-color: var(--mc-line) !important;
+        border-width: 0.5px !important;
+        opacity: 1 !important;
     }
     [data-testid="stSidebarUserContent"],
     [data-testid="stSidebarHeader"] {
@@ -1167,7 +1183,6 @@ st.markdown(
         padding-right: 0.85rem !important;
         box-sizing: border-box !important;
     }
-    /* Hide Streamlit sidebar open/close controls (broken icon font shows "keyboard…"; blue block) */
     [data-testid="stSidebarCollapseButton"],
     [data-testid="collapsedControl"] {
         display: none !important;
@@ -1193,238 +1208,220 @@ st.markdown(
         padding-bottom: 0 !important;
     }
 
-    /* Prominent section banners (Chinese) */
     .sidebar-pill-header {
-        font-family: 'Fraunces', serif !important;
-        font-weight: 800 !important;
-        font-size: 1.08rem !important;
-        letter-spacing: 0.04em !important;
-        color: #fef6e4 !important;
-        background: linear-gradient(118deg, #001858 0%, #172c66 92%) !important;
+        font-family: 'Playfair Display', Georgia, serif !important;
+        font-weight: 600 !important;
+        font-size: 1.02rem !important;
+        letter-spacing: 0.06em !important;
+        color: var(--mc-text) !important;
+        background: rgba(245, 240, 232, 0.08) !important;
         padding: 10px 14px !important;
-        border-radius: 12px !important;
-        border: 2px solid #001858 !important;
+        border-radius: 4px !important;
+        border: 0.5px solid var(--mc-line) !important;
         margin: 4px 0 14px 0 !important;
-        box-shadow: 4px 4px 0 #8bd3dd !important;
+        box-shadow: none !important;
     }
     .sidebar-pill-header--news {
-        color: #001858 !important;
-        background: linear-gradient(118deg, #8bd3dd 0%, #f582ae 100%) !important;
-        border-color: #001858 !important;
-        box-shadow: 4px 4px 0 #001858 !important;
+        color: var(--mc-text) !important;
+        background: rgba(245, 240, 232, 0.06) !important;
+        border: 0.5px solid var(--mc-line) !important;
+        box-shadow: none !important;
         margin-top: 10px !important;
     }
     .sidebar-pill-sub {
-        font-size: 0.78rem !important;
-        font-weight: 600 !important;
-        color: #172c66 !important;
+        font-size: 0.76rem !important;
+        font-weight: 400 !important;
+        color: var(--mc-muted) !important;
         margin: -6px 0 12px 0 !important;
-        opacity: 0.9 !important;
+        opacity: 1 !important;
     }
 
-    /* ── SIDEBAR BUTTONS (force solid, never transparent) ── */
-    [data-testid="stSidebar"] .stButton > button {
-        background-color: #f582ae !important;
-        color: #001858 !important;
-        border: 2px solid #001858 !important;
-        border-radius: 12px !important;
-        font-weight: 700 !important;
-        box-shadow: 3px 3px 0px #001858 !important;
-    }
-    [data-testid="stSidebar"] .stButton > button:hover {
-        background-color: #001858 !important;
-        color: #fef6e4 !important;
-        box-shadow: 4px 4px 0px #f582ae !important;
-    }
-
-    /* ── BUTTONS ───────────────────────────────────────── */
+    /* McKinsey buttons: transparent + hairline */
+    [data-testid="stSidebar"] .stButton > button,
     .stButton > button {
-        background-color: #f582ae !important;
-        color: #001858 !important;
-        border: 2px solid #001858 !important;
-        border-radius: 12px !important;
-        font-family: 'DM Sans', sans-serif !important;
-        font-weight: 700 !important;
-        font-size: 0.9rem !important;
-        letter-spacing: 0.01em !important;
-        box-shadow: 3px 3px 0px #001858 !important;
-        transition: all 0.15s ease !important;
+        background-color: transparent !important;
+        color: var(--mc-text) !important;
+        border: 0.5px solid var(--mc-line) !important;
+        border-radius: 2px !important;
+        font-family: 'Inter', system-ui, sans-serif !important;
+        font-weight: 500 !important;
+        font-size: 0.88rem !important;
+        letter-spacing: 0.04em !important;
+        box-shadow: none !important;
+        transition: background 0.15s ease, border-color 0.15s ease !important;
     }
+    [data-testid="stSidebar"] .stButton > button:hover,
     .stButton > button:hover {
-        background-color: #001858 !important;
-        color: #fef6e4 !important;
-        transform: translate(-1px, -1px) !important;
-        box-shadow: 4px 4px 0px #f582ae !important;
+        background-color: rgba(245, 240, 232, 0.08) !important;
+        color: var(--mc-text) !important;
+        border-color: rgba(245, 240, 232, 0.42) !important;
+        transform: none !important;
+        box-shadow: none !important;
     }
     .stButton > button:active {
-        transform: translate(2px, 2px) !important;
-        box-shadow: 1px 1px 0px #001858 !important;
+        transform: none !important;
+        background-color: rgba(245, 240, 232, 0.12) !important;
+        box-shadow: none !important;
     }
     [data-testid="baseButton-primary"] {
-        background-color: #001858 !important;
-        color: #fef6e4 !important;
-        border: 2px solid #001858 !important;
-        box-shadow: 3px 3px 0px #f582ae !important;
+        background-color: rgba(245, 240, 232, 0.1) !important;
+        color: var(--mc-text) !important;
+        border: 0.5px solid rgba(245, 240, 232, 0.45) !important;
+        box-shadow: none !important;
     }
     [data-testid="baseButton-primary"]:hover {
-        background-color: #f582ae !important;
-        color: #001858 !important;
-        box-shadow: 4px 4px 0px #001858 !important;
+        background-color: rgba(245, 240, 232, 0.16) !important;
+        color: var(--mc-text) !important;
+        box-shadow: none !important;
     }
     [data-testid="baseButton-secondary"] {
-        background-color: #8bd3dd !important;
-        color: #001858 !important;
-        border: 2px solid #001858 !important;
-        box-shadow: 3px 3px 0px #001858 !important;
+        background-color: transparent !important;
+        color: var(--mc-muted) !important;
+        border: 0.5px solid var(--mc-line) !important;
+        box-shadow: none !important;
     }
     [data-testid="baseButton-secondary"]:hover {
-        background-color: #001858 !important;
-        color: #8bd3dd !important;
+        background-color: rgba(245, 240, 232, 0.06) !important;
+        color: var(--mc-text) !important;
     }
     .stLinkButton > a {
-        background-color: #8bd3dd !important;
-        color: #001858 !important;
-        border: 2px solid #001858 !important;
-        border-radius: 12px !important;
-        font-family: 'DM Sans', sans-serif !important;
-        font-weight: 700 !important;
-        box-shadow: 3px 3px 0px #001858 !important;
-        transition: all 0.15s ease !important;
+        background-color: transparent !important;
+        color: var(--mc-text) !important;
+        border: 0.5px solid var(--mc-line) !important;
+        border-radius: 2px !important;
+        font-family: 'Inter', system-ui, sans-serif !important;
+        font-weight: 500 !important;
+        box-shadow: none !important;
+        transition: background 0.15s ease !important;
     }
     .stLinkButton > a:hover {
-        background-color: #001858 !important;
-        color: #fef6e4 !important;
-        transform: translate(-1px, -1px) !important;
+        background-color: rgba(245, 240, 232, 0.08) !important;
+        color: var(--mc-text) !important;
+        transform: none !important;
     }
 
-    /* ── TEXT INPUTS & SELECTBOX ───────────────────────── */
     .stTextInput input,
     .stTextArea textarea {
-        background-color: #fef6e4 !important;
-        border: 2px solid #001858 !important;
-        border-radius: 10px !important;
-        color: #172c66 !important;
-        font-family: 'DM Sans', sans-serif !important;
-        font-size: 0.95rem !important;
+        background-color: rgba(245, 240, 232, 0.04) !important;
+        border: 0.5px solid var(--mc-line) !important;
+        border-radius: 2px !important;
+        color: var(--mc-text) !important;
+        font-family: 'Inter', system-ui, sans-serif !important;
+        font-weight: 400 !important;
+        font-size: 0.92rem !important;
     }
     .stTextInput input:focus,
     .stTextArea textarea:focus {
-        border-color: #f582ae !important;
-        box-shadow: 0 0 0 3px rgba(245, 130, 174, 0.25) !important;
+        border-color: rgba(245, 240, 232, 0.45) !important;
+        box-shadow: 0 0 0 1px rgba(245, 240, 232, 0.12) !important;
     }
-    /* Trigger box */
     .stSelectbox > div > div,
     .stSelectbox [data-baseweb="select"] > div {
-        background-color: #fef6e4 !important;
-        border: 2px solid #001858 !important;
-        border-radius: 10px !important;
-        color: #001858 !important;
-        font-family: 'DM Sans', sans-serif !important;
-        font-weight: 600 !important;
+        background-color: rgba(245, 240, 232, 0.05) !important;
+        border: 0.5px solid var(--mc-line) !important;
+        border-radius: 2px !important;
+        color: var(--mc-text) !important;
+        font-family: 'Inter', system-ui, sans-serif !important;
+        font-weight: 500 !important;
     }
-    /* Displayed selected value text */
     .stSelectbox [data-baseweb="select"] [data-testid="stMarkdownContainer"] p,
     .stSelectbox [data-baseweb="select"] span,
     .stSelectbox [data-baseweb="select"] div {
-        color: #001858 !important;
-        font-family: 'DM Sans', sans-serif !important;
-        font-weight: 600 !important;
+        color: var(--mc-text) !important;
+        font-family: 'Inter', system-ui, sans-serif !important;
+        font-weight: 500 !important;
     }
-    /* Dropdown popup background */
     [data-baseweb="popover"] [data-baseweb="menu"],
     [data-baseweb="popover"] ul,
     ul[data-testid="stSelectboxVirtualDropdown"] {
-        background-color: #fef6e4 !important;
-        border: 2px solid #001858 !important;
-        border-radius: 12px !important;
+        background-color: var(--mc-sidebar) !important;
+        border: 0.5px solid var(--mc-line) !important;
+        border-radius: 2px !important;
     }
-    /* Individual dropdown options */
     [data-baseweb="popover"] li,
     [data-baseweb="menu"] li,
     ul[data-testid="stSelectboxVirtualDropdown"] li {
-        background-color: #fef6e4 !important;
-        color: #001858 !important;
-        font-family: 'DM Sans', sans-serif !important;
-        font-weight: 500 !important;
+        background-color: transparent !important;
+        color: var(--mc-text) !important;
+        font-family: 'Inter', system-ui, sans-serif !important;
+        font-weight: 400 !important;
     }
-    /* Hover state */
     [data-baseweb="popover"] li:hover,
     [data-baseweb="menu"] li:hover,
     ul[data-testid="stSelectboxVirtualDropdown"] li:hover {
-        background-color: #8bd3dd !important;
-        color: #001858 !important;
+        background-color: rgba(245, 240, 232, 0.08) !important;
+        color: var(--mc-text) !important;
     }
-    /* Selected / active option */
     [data-baseweb="popover"] li[aria-selected="true"],
     ul[data-testid="stSelectboxVirtualDropdown"] li[aria-selected="true"] {
-        background-color: #f582ae !important;
-        color: #001858 !important;
-        font-weight: 700 !important;
+        background-color: rgba(245, 240, 232, 0.12) !important;
+        color: var(--mc-text) !important;
+        font-weight: 500 !important;
     }
-    /* Option text spans */
     [data-baseweb="popover"] li span,
     [data-baseweb="menu"] li span {
-        color: #001858 !important;
-        font-family: 'DM Sans', sans-serif !important;
+        color: var(--mc-text) !important;
+        font-family: 'Inter', system-ui, sans-serif !important;
     }
 
-    /* ── RADIO (section nav) ───────────────────────────── */
     div[role="radiogroup"] label {
-        font-family: 'DM Sans', sans-serif !important;
-        font-weight: 600 !important;
-        color: #172c66 !important;
-        border-radius: 10px !important;
-        padding: 6px 14px !important;
-        transition: background 0.15s !important;
+        font-family: 'Inter', system-ui, sans-serif !important;
+        font-weight: 500 !important;
+        color: var(--mc-muted) !important;
+        border-radius: 2px !important;
+        padding: 6px 12px !important;
+        border: 0.5px solid transparent !important;
+        transition: background 0.15s ease, border-color 0.15s ease !important;
     }
     div[role="radiogroup"] label:hover {
-        background-color: rgba(245, 130, 174, 0.12) !important;
+        background-color: rgba(245, 240, 232, 0.06) !important;
+        border-color: var(--mc-line) !important;
     }
     div[role="radiogroup"] [data-testid="stMarkdownContainer"] p {
-        font-weight: 600 !important;
+        font-weight: 500 !important;
+        color: var(--mc-text) !important;
     }
 
-    /* ── EXPANDERS ─────────────────────────────────────── */
     [data-testid="stExpander"] {
-        border: 2px solid #8bd3dd !important;
-        border-radius: 14px !important;
-        background-color: rgba(254, 246, 228, 0.6) !important;
+        border: 0.5px solid var(--mc-line) !important;
+        border-radius: 4px !important;
+        background-color: rgba(245, 240, 232, 0.04) !important;
         margin-bottom: 10px !important;
         overflow: hidden !important;
     }
     [data-testid="stExpander"] details summary {
-        background-color: rgba(139, 211, 221, 0.18) !important;
-        font-family: 'DM Sans', sans-serif !important;
-        font-weight: 600 !important;
-        color: #001858 !important;
-        padding: 10px 16px !important;
+        background-color: rgba(245, 240, 232, 0.05) !important;
+        font-family: 'Inter', system-ui, sans-serif !important;
+        font-weight: 500 !important;
+        color: var(--mc-text) !important;
+        padding: 10px 14px !important;
+        border-bottom: 0.5px solid var(--mc-line) !important;
     }
     [data-testid="stExpander"] details summary:hover {
-        background-color: rgba(139, 211, 221, 0.35) !important;
+        background-color: rgba(245, 240, 232, 0.08) !important;
     }
     [data-testid="stExpander"] details summary p {
-        font-family: 'DM Sans', sans-serif !important;
-        font-weight: 600 !important;
-        color: #001858 !important;
+        font-family: 'Inter', system-ui, sans-serif !important;
+        font-weight: 500 !important;
+        color: var(--mc-text) !important;
     }
-    /* overrides for status-coloured terms */
     .hard-term [data-testid="stExpander"] details summary,
     .hard-term .streamlit-expanderHeader {
-        background-color: #8B0000 !important;
-        color: #fff1f2 !important;
-        border-radius: 10px !important;
+        background-color: rgba(180, 60, 60, 0.22) !important;
+        color: var(--mc-text) !important;
+        border-radius: 4px !important;
     }
     .medium-term [data-testid="stExpander"] details summary,
     .medium-term .streamlit-expanderHeader {
-        background-color: #6b5a17 !important;
-        color: #fffbea !important;
-        border-radius: 10px !important;
+        background-color: rgba(200, 160, 70, 0.2) !important;
+        color: var(--mc-text) !important;
+        border-radius: 4px !important;
     }
     .key-term [data-testid="stExpander"] details summary,
     .key-term .streamlit-expanderHeader {
-        background-color: #001858 !important;
-        color: #fef6e4 !important;
-        border-radius: 10px !important;
+        background-color: rgba(245, 240, 232, 0.12) !important;
+        color: var(--mc-text) !important;
+        border-radius: 4px !important;
     }
     .hard-term [data-testid="stExpander"] details summary p,
     .medium-term [data-testid="stExpander"] details summary p,
@@ -1432,70 +1429,68 @@ st.markdown(
         color: inherit !important;
     }
 
-    /* ── ALERT BOXES ───────────────────────────────────── */
+    /* Quiz / feedback: translucent panels on navy */
     [data-testid="stAlert"] {
-        border-radius: 12px !important;
-        font-family: 'DM Sans', sans-serif !important;
-        border-left-width: 4px !important;
+        border-radius: 4px !important;
+        font-family: 'Inter', system-ui, sans-serif !important;
+        border: 0.5px solid var(--mc-line) !important;
+        border-left: 0.5px solid var(--mc-line) !important;
     }
     [data-testid="stAlert"][data-baseweb="notification"] {
-        background-color: rgba(139, 211, 221, 0.18) !important;
-        border-left-color: #8bd3dd !important;
+        background-color: rgba(245, 240, 232, 0.06) !important;
+        border-color: var(--mc-line) !important;
     }
     .stSuccess > div {
-        background-color: rgba(139, 211, 221, 0.2) !important;
-        border-left-color: #8bd3dd !important;
-        color: #001858 !important;
+        background-color: rgba(120, 200, 160, 0.14) !important;
+        border: 0.5px solid rgba(245, 240, 232, 0.18) !important;
+        border-left: 0.5px solid rgba(245, 240, 232, 0.18) !important;
+        color: var(--mc-text) !important;
     }
     .stError > div {
-        background-color: rgba(245, 130, 174, 0.15) !important;
-        border-left-color: #f582ae !important;
-        color: #001858 !important;
+        background-color: rgba(220, 90, 90, 0.14) !important;
+        border: 0.5px solid rgba(245, 240, 232, 0.18) !important;
+        color: var(--mc-text) !important;
     }
     .stWarning > div {
-        background-color: rgba(243, 210, 193, 0.45) !important;
-        border-left-color: #f3d2c1 !important;
-        color: #001858 !important;
+        background-color: rgba(230, 190, 100, 0.12) !important;
+        border: 0.5px solid rgba(245, 240, 232, 0.18) !important;
+        color: var(--mc-text) !important;
     }
     .stInfo > div {
-        background-color: rgba(139, 211, 221, 0.15) !important;
-        border-left-color: #8bd3dd !important;
-        color: #172c66 !important;
+        background-color: rgba(120, 170, 230, 0.12) !important;
+        border: 0.5px solid rgba(245, 240, 232, 0.18) !important;
+        color: var(--mc-muted) !important;
     }
 
-    /* ── CONTAINERS WITH BORDERS ───────────────────────── */
     [data-testid="stVerticalBlockBorderWrapper"] {
-        border-radius: 16px !important;
-        border: 2px solid #8bd3dd !important;
-        background-color: rgba(254, 246, 228, 0.55) !important;
+        border-radius: 4px !important;
+        border: 0.5px solid var(--mc-line) !important;
+        background-color: rgba(245, 240, 232, 0.04) !important;
     }
 
-    /* ── CODE BLOCKS ───────────────────────────────────── */
     code, pre {
-        background-color: #f3d2c1 !important;
-        border: 1px solid #001858 !important;
-        border-radius: 8px !important;
-        color: #001858 !important;
+        background-color: rgba(245, 240, 232, 0.08) !important;
+        border: 0.5px solid var(--mc-line) !important;
+        border-radius: 2px !important;
+        color: var(--mc-text) !important;
+        font-family: ui-monospace, monospace !important;
     }
-    code { padding: 2px 7px !important; }
+    code { padding: 2px 6px !important; }
 
-    /* ── CAPTIONS ──────────────────────────────────────── */
     .stCaption,
     [data-testid="stCaptionContainer"] p {
-        font-family: 'DM Sans', sans-serif !important;
-        color: #172c66 !important;
-        opacity: 0.7 !important;
+        font-family: 'Inter', system-ui, sans-serif !important;
+        color: var(--mc-muted) !important;
+        opacity: 1 !important;
+        font-weight: 300 !important;
     }
 
-    /* ── DIVIDERS ──────────────────────────────────────── */
     hr {
-        border-color: #8bd3dd !important;
-        border-width: 1.5px !important;
-        opacity: 0.45 !important;
+        border-color: var(--mc-line) !important;
+        border-width: 0.5px !important;
+        opacity: 1 !important;
     }
 
-    /* ── DIALOG — complete cream-on-navy override ─ */
-    /* Hit every container Streamlit/BaseWeb might render the modal in */
     [data-testid="stDialog"],
     [data-testid="stDialog"] > div,
     [data-testid="stDialog"] > div > div,
@@ -1507,23 +1502,20 @@ st.markdown(
     div[class*="dialog"],
     div[class*="modal"],
     div[class*="Modal"] {
-        background-color: #fef6e4 !important;
-        color: #172c66 !important;
+        background-color: var(--mc-bg) !important;
+        color: var(--mc-muted) !important;
     }
-    /* The named block wrappers */
     [data-testid="stDialog"] [data-testid="stVerticalBlockBorderWrapper"],
     [role="dialog"] [data-testid="stVerticalBlockBorderWrapper"] {
-        background: #fef6e4 !important;
-        border: 2px solid #001858 !important;
-        border-radius: 20px !important;
-        box-shadow: 6px 6px 0px #001858 !important;
+        background: rgba(245, 240, 232, 0.05) !important;
+        border: 0.5px solid var(--mc-line) !important;
+        border-radius: 6px !important;
+        box-shadow: none !important;
     }
-    /* Nuclear text override — every node inside any dialog becomes readable */
     [data-testid="stDialog"] *,
     [role="dialog"] * {
-        color: #172c66 !important;
+        color: var(--mc-muted) !important;
     }
-    /* Headings & bold → deep navy */
     [data-testid="stDialog"] h1, [role="dialog"] h1,
     [data-testid="stDialog"] h2, [role="dialog"] h2,
     [data-testid="stDialog"] h3, [role="dialog"] h3,
@@ -1532,74 +1524,70 @@ st.markdown(
     [data-testid="stDialog"] h6, [role="dialog"] h6,
     [data-testid="stDialog"] strong, [role="dialog"] strong,
     [data-testid="stDialog"] b, [role="dialog"] b {
-        color: #001858 !important;
-        font-family: 'Fraunces', serif !important;
+        color: var(--mc-text) !important;
+        font-family: 'Playfair Display', Georgia, serif !important;
     }
-    /* Buttons inside dialog */
     [data-testid="stDialog"] button,
     [role="dialog"] button {
-        background-color: #f582ae !important;
-        color: #001858 !important;
-        border: 2px solid #001858 !important;
-        border-radius: 12px !important;
-        font-weight: 700 !important;
-        box-shadow: 3px 3px 0px #001858 !important;
+        background-color: transparent !important;
+        color: var(--mc-text) !important;
+        border: 0.5px solid var(--mc-line) !important;
+        border-radius: 2px !important;
+        font-weight: 500 !important;
+        box-shadow: none !important;
     }
     [data-testid="stDialog"] button:hover,
     [role="dialog"] button:hover {
-        background-color: #001858 !important;
-        color: #fef6e4 !important;
+        background-color: rgba(245, 240, 232, 0.1) !important;
+        color: var(--mc-text) !important;
     }
-    /* Inner st.container(border=True) → white panel for contrast */
     [data-testid="stDialog"] [data-testid="stVerticalBlockBorderWrapper"]
         [data-testid="stVerticalBlockBorderWrapper"],
     [role="dialog"] [data-testid="stVerticalBlockBorderWrapper"]
         [data-testid="stVerticalBlockBorderWrapper"] {
-        background-color: rgba(255, 255, 255, 0.88) !important;
-        border: 2px solid #8bd3dd !important;
-        border-radius: 14px !important;
+        background-color: rgba(245, 240, 232, 0.06) !important;
+        border: 0.5px solid var(--mc-line) !important;
+        border-radius: 4px !important;
     }
-    /* Caption text */
     [data-testid="stDialog"] [data-testid="stCaptionContainer"] p,
     [role="dialog"] [data-testid="stCaptionContainer"] p {
-        color: #172c66 !important;
-        opacity: 0.70 !important;
+        color: var(--mc-muted) !important;
+        opacity: 1 !important;
     }
 
-    /* ── LINKS ─────────────────────────────────────────── */
     a.sidebar-news-link {
-        color: #001858 !important;
+        color: var(--mc-text) !important;
         text-decoration: none;
-        font-weight: 700;
+        font-weight: 500;
         cursor: pointer;
-        background-color: rgba(245, 130, 174, 0.12);
-        padding: 1px 6px;
-        border-radius: 5px;
+        background-color: transparent;
+        padding: 2px 4px;
+        border-radius: 2px;
+        border-bottom: 0.5px solid var(--mc-line);
     }
     a.sidebar-news-link:hover {
-        color: #f582ae !important;
-        text-decoration: underline;
-        background-color: rgba(245, 130, 174, 0.22);
+        color: var(--mc-text) !important;
+        text-decoration: none;
+        background-color: rgba(245, 240, 232, 0.08);
+        border-bottom-color: rgba(245, 240, 232, 0.45);
     }
     a.news-article-inline-link {
-        color: #001858;
-        font-weight: 600;
+        color: var(--mc-text);
+        font-weight: 500;
         text-decoration: none;
         cursor: pointer;
-        border-bottom: 2px solid #f582ae;
+        border-bottom: 0.5px solid var(--mc-line);
     }
     a.news-article-inline-link:hover {
-        color: #f582ae;
+        color: var(--mc-text);
         text-decoration: none;
+        border-bottom-color: rgba(245, 240, 232, 0.5);
     }
 
-    /* ── SPINNER ───────────────────────────────────────── */
     [data-testid="stSpinner"] > div {
-        border-top-color: #f582ae !important;
+        border-top-color: rgba(245, 240, 232, 0.55) !important;
     }
 
-    /* ── STREAMLIT CHROME (toolbar / deploy / header strip) ─ */
-    /* Sidebar toggle is hidden in SIDEBAR block; sidebar stays on-screen via translateX(0). */
     [data-testid="stToolbar"],
     [data-testid="stDecoration"],
     [data-testid="stDeployButton"],
@@ -1610,14 +1598,26 @@ st.markdown(
         height: 0 !important;
         min-height: 0 !important;
         padding: 0 !important;
+        background: transparent !important;
     }
 
-    /* ── METRIC ────────────────────────────────────────── */
     [data-testid="metric-container"] {
-        background-color: rgba(139, 211, 221, 0.12) !important;
-        border: 2px solid #8bd3dd !important;
-        border-radius: 14px !important;
+        background-color: rgba(245, 240, 232, 0.05) !important;
+        border: 0.5px solid var(--mc-line) !important;
+        border-radius: 4px !important;
         padding: 12px !important;
+    }
+    /* Form field labels (search, selectbox, etc.) */
+    [data-testid="stWidgetLabel"] p,
+    [data-testid="stWidgetLabel"] label,
+    .stRadio > label,
+    .stCheckbox > label {
+        color: var(--mc-muted) !important;
+        font-family: 'Inter', system-ui, sans-serif !important;
+    }
+    [data-baseweb="input"] input,
+    [data-baseweb="textarea"] textarea {
+        color: var(--mc-text) !important;
     }
     </style>
     """,
@@ -1877,7 +1877,7 @@ elif chosen == SECTION_LABELS[2]:
                     st.write(info.get("def", ""))
                     if info.get("def_zh"):
                         st.markdown(
-                            f"<span style='color:#6B7280; font-style: italic;'>{info.get('def_zh')}</span>",
+                            f"<span style='color:rgba(245,240,232,0.55); font-style: italic;'>{info.get('def_zh')}</span>",
                             unsafe_allow_html=True,
                         )
 
